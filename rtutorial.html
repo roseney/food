@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Timer - Food Selection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #fae105 0%, #e6c408 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-container {
+            background-color: #f8da88;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+        .header-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        .header-icons img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .header-icons img:hover {
+            transform: scale(1.1);
+        }
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .food-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 600px;
+            width: 100%;
+        }
+        .food-item {
+            background-color: rgb(248, 248, 246);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .food-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        .food-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+        .food-item h2 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .food-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Modal styles */
+        #tutorialPage {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .tutorial-content {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tutorial-image {
+            width: 80%;
+            max-width: 500px;
+            aspect-ratio: 4/0;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #f8da88;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .food-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Choose Your Food</h1>
+            <div class="header-icons">
+                <img src="./assets/cookies.png" alt="Cookies Icon" class="cookies-icon">
+                <img src="./assets/watermelon.png" alt="Watermelon Icon" class="watermelon-icon">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="food-container">
+            <div class="food-item" onclick="showTutorial('egg')">
+                <img src="./assets/Egg.png" alt="Egg">
+                <h2>Boiled Egg</h2>
+                <p>Perfect for a quick protein boost</p>
+            </div>
+            <div class="food-item" onclick="showTutorial('toast')">
+                <img src="./assets/Toast.png" alt="Toast">
+                <h2>Toast</h2>
+                <p>Crispy and delicious breakfast</p>
+            </div>
+            <div class="food-item" onclick="showTutorial('pancake')">
+                <img src="./assets/Pancake.png" alt="Pancake">
+                <h2>Pancake</h2>
+                <p>Fluffy and sweet morning treat</p>
+            </div>
+            <div class="food-item" onclick="showTutorial('bacon')">
+                <img src="./assets/Bacon.png" alt="Bacon">
+                <h2>Bacon</h2>
+                <p>Crispy and savory breakfast classic</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Tutorial Page -->
+    <div id="tutorialPage">
+        <button class="back-button" onclick="hideTutorial()">← Back</button>
+        <div class="tutorial-content" id="tutorialContent">
+            <!-- Content will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        function showTutorial(food) {
+            const tutorialPage = document.getElementById('tutorialPage');
+            const tutorialContent = document.getElementById('tutorialContent');
+            
+            let content = '';
+            switch(food) {
+                case 'egg':
+                    content = `
+                        <h2>How to Boil an Egg</h2>
+                        <img src="./assets/boiled egg.png" alt="Egg Tutorial" class="tutorial-image">
+                        <div class="tutorial-steps">
+                        </div>
+                    `;
+                    break;
+                // Add other cases for different foods
+            }
+            
+            tutorialContent.innerHTML = content;
+            tutorialPage.style.display = 'block';
+        }
+
+        function hideTutorial() {
+            document.getElementById('tutorialPage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
